@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Prediction</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <form method="post" action="/ml/predict/" class="needs-validation" novalidate>
+            {% csrf_token %}
+
+            <!-- Age (still a number input) -->
+            <div class="form-group">
+                <label for="Age">อายุ:</label>
+                <input type="number" class="form-control" name="Age" id="Age" required>
+            </div>
+
+            <!-- Gender dropdown -->
+            <div class="form-group">
+                <label for="Gender">เพศ:</label>
+                <select class="form-control" name="Gender" id="Gender" required>
+                    <option value="0">ชาย</option>
+                    <option value="1">หญิง</option>
+                </select>
+            </div>
+
+            <!-- Self Employed dropdown -->
+            <div class="form-group">
+                <label for="self_employed">เป็นพนักงานอิสระหรือไม่:</label>
+                <select class="form-control" name="self_employed" id="self_employed" required>
+                    <option value="0">เป็น</option>
+                    <option value="1">ไม่เป็น</option>
+                </select>
+            </div>
+
+            <!-- Family History dropdown -->
+            <div class="form-group">
+                <label for="family_history">ครอบครัวเคยมีประวัติหรือไม่:</label>
+                <select class="form-control" name="family_history" id="family_history" required>
+                    <option value="0">ไม่มี</option>
+                    <option value="1">มี</option>
+                </select>
+            </div>
+
+            <!-- Work Interfere dropdown -->
+            <div class="form-group">
+                <label for="work_interfere">กระทบกับหน้าที่การงานแค่ไหน:</label>
+                <select class="form-control" name="work_interfere" id="work_interfere" required>
+                    <option value="0">ไม่กระทบ</option>
+                    <option value="1">น้อย</option>
+                    <option value="2">ปานกลาง</option>
+                    <option value="3">มาก</option>
+                </select>
+            </div>
+
+            <!-- Remote Work dropdown -->
+            <div class="form-group">
+                <label for="remote_work">ทำงานจากระยะไกล:</label>
+                <select class="form-control" name="remote_work" id="remote_work" required>
+                    <option value="0">ไม่ใช่</option>
+                    <option value="1">ใช่</option>
+                </select>
+            </div>
+
+            <!-- Benefits dropdown -->
+            <div class="form-group">
+                <label for="benefits">บริษัทมีสวัสดิการด้านสุขภาพจิต:</label>
+                <select class="form-control" name="benefits" id="benefits" required>
+                    <option value="0">มี</option>
+                    <option value="1">ไม่มี</option>
+                    <option value="2">ไม่ทราบ</option>
+                </select>
+            </div>
+
+            <!-- Wellness Program dropdown -->
+            <div class="form-group">
+                <label for="wellness_program">บริษัทมีโครงการส่งเสริมสุขภาพจิต:</label>
+                <select class="form-control" name="wellness_program" id="wellness_program" required>
+                    <option value="0">มี</option>
+                    <option value="1">ไม่มี</option>
+                    <option value="2">ไม่ทราบ</option>
+                </select>
+            </div>
+
+            <!-- Seek Help dropdown -->
+            <div class="form-group">
+                <label for="seek_help">มีแห่งข้อมูลในการรับความช่วยเหลือ:</label>
+                <select class="form-control" name="seek_help" id="seek_help" required>
+                    <option value="0">มี</option>
+                    <option value="1">ไม่มี</option>
+                    <option value="2">ไม่ทราบ</option>
+                </select>
+            </div>
+
+            <!-- Mental Health Consequence dropdown -->
+            <div class="form-group">
+                <label for="mental_health_consequence">ผลกระทบด้านสุขภาพจิต:</label>
+                <select class="form-control" name="mental_health_consequence" id="mental_health_consequence" required>
+                    <option value="0">ไม่มี</option>
+                    <option value="1">อาจจะ</option>
+                    <option value="2">มี</option>
+                </select>
+            </div>
+
+            <!-- Physical Health Consequence dropdown -->
+            <div class="form-group">
+                <label for="phys_health_consequence">ผลกระทบด้านสุขภาพกาย:</label>
+                <select class="form-control" name="phys_health_consequence" id="phys_health_consequence" required>
+                    <option value="0">ไม่มี</option>
+                    <option value="1">อาจจะ</option>
+                    <option value="2">มี</option>
+                </select>
+            </div>
+
+            <!-- Coworkers dropdown -->
+            <div class="form-group">
+                <label for="coworkers">ความเต็มใจที่จะคุยด้านสุขภาพจิตกับเพื่อนร่วมงาน:</label>
+                <select class="form-control" name="coworkers" id="coworkers" required>
+                    <option value="0">ไม่เต็มใจ</option>
+                    <option value="1">เต็มใจบางคน</option>
+                    <option value="2">เต้มใจ</option>
+                </select>
+            </div>
+
+            <!-- Supervisor dropdown -->
+            <div class="form-group">
+                <label for="supervisor">ความเต็มใจที่จะคุยด้านสุขภาพจิตกับผู้ว่าจ้าง:</label>
+                <select class="form-control" name="supervisor" id="supervisor" required>
+                    <option value="0">ไม่เต็มใจ</option>
+                    <option value="1">เต็มใจบางคน</option>
+                    <option value="2">เต้มใจ</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">ทำนาย</button>
+        </form>
+
+        <!-- Conditionally display the prediction result -->
+        {% if prediction %}
+            <div class="alert alert-info mt-4">
+                <h4>ผลการทำนาย: {{ prediction }}</h4>
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
